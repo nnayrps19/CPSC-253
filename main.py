@@ -1,73 +1,47 @@
-# The purpose of this file is to create an encryption and decryption program that will take a file inputted by the user and convert it to an encrypted message in a new file. 
-# This program will also take that file with the encrypted message and convert it back to the original message.
-import string
-from PIL import Image
+import encryption
 
-def open_file(input_path, output_path):
-    try:
+def main():
+    input_path = 'message.txt'
+    output_path = 'encoded_message.txt'
+    encryption.encrypt_file(input_path, output_path)
+    while True:
+        menu()
+        choice = input("Enter your choice: ")
+        if choice == '1':
+            input_path = input("Enter the path of the file to encrypt: ")
+            output_path = input("Enter the path of the encrypted file: ")
+            encryption.encrypt_file(input_path, output_path)
+        elif choice == '2':
+            input_path = input("Enter the path of the file to decrypt: ")
+            output_path = input("Enter the path of the decrypted file: ")
+            encryption.decrypt_file(input_path, output_path)
+        elif choice == '3':
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
-        with open(input_path, 'r') as input_file:   #Opens the selected file and reads the contents
-            content = input_file.read()
-            
-        encrypt_data = ''.join(chr(ord(char) + 10) for char in content) #Basic encryption function that shifts the value of ASCII characters by 10
+def menu():
+    print(** Welcome to the Encryption Program **)
+    print("1. Encrypt a file")
+    print("2. Decrypt a file")
+    print("3. Exit")
 
-        with open(output_path, 'w') as output_file:  #Writes encrypted message to outputfile
-            output_path.write(content)
+def encyrpt_to_image(input_path, encrypted_path):
+    content = encryption.open_file(input_path, encrypted_path)
+    if content: 
+        char_mapping = image_map()
+        encrypted_image = text_to_image(content, char_mapping)
+        encrypted_image.save(encrypted_path)
+        print(f"Encrypted image saved to '{encrypted_path}'")
 
-        print("File has been encoded! ")
-    except FileNotFoundError:
-        print(f"Error: File '{input_path}' was not found!")
-    except IOError:
-        print(f"Error: I/O error has occured!")
-    except Exception as e:
-        print (f"An unexpected error has occured!")
+decrypt_to_text(input_path, decrypted_path):
+    encrypted_image = Image.open(input_path)
+    char_mapping = image_map()
+    decrypted_text = image_to_text(encrypted_image, char_mapping)
+    with open(decrypted_path, 'w') as decrypted_file:
+        decrypted_file.write(decrypted_text)
+    print(f"Decrypted text saved to '{decrypted_path}'")
 
-#Functions for character mapping and generating images
-def image_map():
-#Creates dictionary for range of character values image will generate from
-    char_map = { 
-        range(65, 81): '', 
-        range(81, 97):'', 
-        range(97, 123):'', 
-        range(48,58):'',
-        range(32,48):''
-    }
-    return char_map
-
-#Takes the ascii value of the character and compares it to the ranges from image_map function
-    def image_for_char(char, char_mapping):     
-        ascii_val = ord(char)
-        for ascii_range m image_path in char_mapping.items():
-            if ascii_val in ascii_range:
-                return Image.open(image_path)
-
-        return None
-    
-    def text_to_image(text, char_mapping):
-        images = [image_for_char(char,char_mapping) for char in text if image_for_char(char, char_mapping)]
-
-        imageWidth = sum(img.width for img in images)
-        imageHeight = max(img.height for img in images)
-
-        result = Image.new('RGB', imageWidth, imageHeight)
-
-#Function to paste images together
-        x_offset = 0
-        for img in images: 
-            result.paste(img,(x_offset, 0))
-            x_offset += img.width
-
-        return result
-
-def image_to_text(text, char_mapping):
-    char_map_inv = {v: k for k, v in char_mapping.items()}
-    tect = ''
-    x_offset = 0
-
-    while x_offset < text.width:
-        for image_path, char in char_map_inv.items():
-            if text.crop((x_offset, 0, x_offset + image_path.width, image_path.height)) == image_path:
-                text += char
-                x_offset += image_path.width
-                break
-    return text
+if __name__ == '__main__':
+    main()
