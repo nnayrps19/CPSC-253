@@ -23,11 +23,11 @@ def open_file(input_path, output_path):
 def image_map():
 #Creates dictionary for range of character values image will generate from
     char_map = { 
-        range(65, 81): '', 
-        range(81, 97):'', 
-        range(97, 123):'', 
-        range(48,58):'',
-        range(32,48):''
+        range(65, 81): 'C:\Users\Ryann\OneDrive\Pictures\102D3500\_DSC0497.NEF',
+        range(81, 97):'C:\Users\Ryann\OneDrive\Pictures\102D3500\_DSC0498.NEF',
+        range(97, 123):'C:\Users\Ryann\OneDrive\Pictures\102D3500\_DSC0499.NEF',
+        range(48,58):'C:\Users\Ryann\OneDrive\Pictures\102D3500\_DSC0500.NEF',
+        range(32,48):'C:\Users\Ryann\OneDrive\Pictures\102D3500\_DSC0501.NEF'
     }
     return char_map
 

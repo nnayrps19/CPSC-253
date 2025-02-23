@@ -22,7 +22,7 @@ def main():
             print("Invalid choice. Please try again.")
 
 def menu():
-    print(** Welcome to the Encryption Program **)
+    print("**Welcome to the Encryption Program **")
     print("1. Encrypt a file")
     print("2. Decrypt a file")
     print("3. Exit")
@@ -35,7 +35,7 @@ def encyrpt_to_image(input_path, encrypted_path):
         encrypted_image.save(encrypted_path)
         print(f"Encrypted image saved to '{encrypted_path}'")
 
-decrypt_to_text(input_path, decrypted_path):
+def decrypt_to_text(input_path, decrypted_path):
     encrypted_image = Image.open(input_path)
     char_mapping = image_map()
     decrypted_text = image_to_text(encrypted_image, char_mapping)
